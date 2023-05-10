@@ -1,0 +1,23 @@
+server:
+    port: 8080
+spring:
+  profiles:
+    active: dev
+  datasource:
+      driverClassName: org.postgresql.Driver
+      #url: jdbc:postgresql://postgres:5432/dev
+      #username: dev
+      #password: dev
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+    show-sql: true
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+    #defaultSchema: dev
+    #user: dev
+    #password: dev
+
