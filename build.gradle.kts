@@ -4,16 +4,15 @@ plugins {
 	id("io.spring.dependency-management") version "1.1.0"
 }
 
-//new
-apply(plugin = "io.spring.dependency-management")
-//new
-
 group = "com.test"
 version = "1.0"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
+	//new repository
+	gradlePluginPortal()
+	//
 }
 
 dependencies {
