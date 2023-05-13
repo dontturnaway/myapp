@@ -1,8 +1,5 @@
 pipeline {
     agent any
-/*    tools {
-        gradle "GRADLE_LATEST"
-    }*/
     stages {
         stage('Build Gradle'){
             steps {
@@ -13,7 +10,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build . -t deem0ne/myapp'
+                    sh 'docker build . -t deem0ne/myapp '
                 }
             }
         }
