@@ -1,35 +1,30 @@
 pipeline {
-    agent {
-        node {
-            label 'docker-agent-alpine'
-            }
-      }
-    triggers {
-        pollSCM '*/5 * * * *'
-    }
+    agent any
+/*    tools {
+        gradle "GRADLE_LATEST"
+    }*/
     stages {
-        stage('Build') {
+        stage('Build Gradle'){
             steps {
-                echo "Building.."
-                sh '''
-                echo "doing build stuff.."
-                '''
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dontturnaway/myapp.git']])
+                sh './gradlew clean build'
             }
         }
-        stage('Test') {
-            steps {
-                echo "Testing.."
-                sh '''
-                echo "doing test stuff.."
-                '''
+        stage('Build docker image'){
+            steps{
+                script{
+                    sh 'docker build . -t deem0ne/myappfromjenkins'
+                }
             }
         }
-        stage('Deliver') {
+        stage('Push image to Dockerhub'){
             steps {
-                echo 'Deliver....'
-                sh '''
-                echo "doing delivery stuff.."
-                '''
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
+                    sh 'docker login -u deem0ne -p ${dockerhubpwd}'
+                    sh 'docker push deem0ne/myappfromjenkins'
+                    }
+                }
             }
         }
     }
