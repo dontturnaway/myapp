@@ -13,7 +13,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build . -t deem0ne/myappfromjenkins'
+                    sh 'docker build . -t deem0ne/myapp'
                 }
             }
         }
@@ -22,7 +22,7 @@ pipeline {
                 script{
                     withCredentials([string(credentialsId: 'dockerhub-pwd', variable: 'dockerhubpwd')]) {
                     sh 'docker login -u deem0ne -p ${dockerhubpwd}'
-                    sh 'docker push deem0ne/myappfromjenkins'
+                    sh 'docker push deem0ne/myapp'
                     }
                 }
             }
