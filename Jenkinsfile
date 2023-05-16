@@ -1,10 +1,19 @@
 pipeline {
     agent any
     stages {
+        stage('Git fetch'){
+            steps {
+                git branch: 'main', url: 'https://github.com/dontturnaway/myapp.git'
+                sh './gradlew clean build'
+                //checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dontturnaway/myapp.git']])
+                //sh './gradlew clean build'
+            }
+        }
         stage('Build Gradle'){
             steps {
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dontturnaway/myapp.git']])
-                sh './gradlew clean build'
+                script {
+                    sh './gradlew clean build'
+                }
             }
         }
         stage('Build docker image'){
