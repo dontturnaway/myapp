@@ -33,5 +33,12 @@ pipeline {
                 }
             }
         }
+        stage('Finalizing'){
+            steps {
+                script {
+                    print("${env.BUILD_NUMBER}")
+                }
+            }
+        }
     }
 }
