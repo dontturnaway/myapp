@@ -4,6 +4,7 @@ import com.test.myapp.exception.CantCreateUserExeption;
 import com.test.myapp.exception.CantCreateUserExeption;
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import jakarta.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Slf4j
 @RestController
 @RequestMapping("/peoplerest")
 public class PeopleRESTController {
@@ -29,6 +31,7 @@ public class PeopleRESTController {
 
     @GetMapping()
     public List<Person> index() {
+        log.debug("[GET PERSON CONTROLLER]: " + " all user list requested");
         return peopleService.findAll();
     }
 

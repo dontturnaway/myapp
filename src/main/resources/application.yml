@@ -1,8 +1,18 @@
 server:
     port: 8080
+logging:
+  file:
+    name: './logs/log.txt'
+    max-size: 10KB #Sets the maximum size of one file, on exceed a new file will be made
+    max-history: 5 #Sets the number of days the logs are kept if clean-history-on-start is set to true
+    total-size-cap: 10KB  #limits all log's total size
+    clean-history-on-start: true #remove old history
+  level:
+    root: "ERROR"
+    org.springframework: "ERROR"
 spring:
   profiles:
-    active: dev
+    active: prod
   datasource:
       driverClassName: org.postgresql.Driver
       #url: jdbc:postgresql://postgres:5432/dev
@@ -20,4 +30,3 @@ spring:
     #defaultSchema: dev
     #user: dev
     #password: dev
-
