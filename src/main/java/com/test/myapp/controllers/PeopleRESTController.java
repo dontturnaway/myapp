@@ -31,7 +31,8 @@ public class PeopleRESTController {
 
     @GetMapping()
     public List<Person> index() {
-        log.debug("[GET PERSON CONTROLLER]: " + " all user list requested");
+        log.info("[GET PERSON CONTROLLER]: " + " all user list requested");
+        log.error("[GET PERSON CONTROLLER]: " + " TEST");
         return peopleService.findAll();
     }
 

@@ -1,18 +1,23 @@
 server:
     port: 8080
-logging:
-  file:
-    name: './logs/log.txt'
-    max-size: 10KB #Sets the maximum size of one file, on exceed a new file will be made
-    max-history: 5 #Sets the number of days the logs are kept if clean-history-on-start is set to true
-    total-size-cap: 10KB  #limits all log's total size
-    clean-history-on-start: true #remove old history
-  level:
-    root: "ERROR"
-    org.springframework: "ERROR"
 spring:
   profiles:
     active: prod
+logging:
+  file:
+    name: ./logs/mytest.log
+  #level:
+    #root: "INFO"
+    #org.springframework: "INFO"
+    #com.test.myapp.controllers: "ERROR"
+  #pattern:
+    #console : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n"
+    #file : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n"
+  logback:
+    rollingpolicy:
+      max-history : 15 #num of days
+      max-file-size : 1KB
+      file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
   datasource:
       driverClassName: org.postgresql.Driver
       #url: jdbc:postgresql://postgres:5432/dev
