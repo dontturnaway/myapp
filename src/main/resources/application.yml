@@ -12,7 +12,7 @@ logging:
     #com.test.myapp.controllers: "ERROR"
   #pattern:
     #console : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n"
-    #file : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n"
+    #file : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n" #file is zipped
   logback:
     rollingpolicy:
       max-history : 15 #num of days
