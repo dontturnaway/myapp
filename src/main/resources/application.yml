@@ -20,6 +20,7 @@ logging:
       file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
   datasource:
       driverClassName: org.postgresql.Driver
+      #applied in profiles
       #url: jdbc:postgresql://postgres:5432/dev
       #username: dev
       #password: dev
