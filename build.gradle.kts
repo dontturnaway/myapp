@@ -24,10 +24,15 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.flywaydb:flyway-core")
 	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
-    implementation("org.projectlombok:lombok:1.18.22")
+    implementation("org.projectlombok:lombok:1.18.26")
     runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
+	//Lombok
+	compileOnly("org.projectlombok:lombok:1.18.26")
+	annotationProcessor("org.projectlombok:lombok:1.18.26")
+	testCompileOnly ("org.projectlombok:lombok:1.18.26")
+	testAnnotationProcessor ("org.projectlombok:lombok:1.18.26")
 }
 
 tasks.withType<Test> {
