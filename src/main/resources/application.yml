@@ -16,7 +16,7 @@ logging:
   logback:
     rollingpolicy:
       max-history : 15 #num of days
-      max-file-size : 1KB
+      max-file-size : 10KB
       file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
   datasource:
       driverClassName: org.postgresql.Driver
