@@ -4,7 +4,7 @@ pipeline {
         stage('Git fetch'){
             steps {
                 git branch: 'main', url: 'https://github.com/dontturnaway/myapp.git'
-                sh './gradlew clean build'
+                //sh './gradlew clean build'
                 //checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dontturnaway/myapp.git']])
                 //sh './gradlew clean build'
             }
