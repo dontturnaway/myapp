@@ -10,7 +10,7 @@ public class MyApp {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MyApp.class, args);
-		log.info("Myapp has runned");
+		log.info("Myapp has started");
 	}
 
 }
