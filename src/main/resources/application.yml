@@ -39,10 +39,15 @@ logging:
       file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
 #metrics section
 management:
+#  server:  #in case if override is needed
+#    port: 8080
   endpoints:
     web:
+      base-path: "/" #instead "actuator/"
+      path-mapping:
+        prometheus: "prometheus"
       exposure:
-        include: "*"
+        include: "prometheus" #only prometheus endpoint is active
   endpoint:
     health:
       show-details: always
