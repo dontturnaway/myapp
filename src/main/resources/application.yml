@@ -45,7 +45,7 @@ management:
     web:
       base-path: "/" #instead "actuator/"
       path-mapping:
-        prometheus: "prometheus"
+        prometheus: "metrics"
       exposure:
         include: "prometheus" #only prometheus endpoint is active
   endpoint:
