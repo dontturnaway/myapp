@@ -11,4 +11,4 @@ ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prod", "myapp.jar"]
 #CREATE COMPOSITION
 #docker-compose -f /Users/Rage/Desktop/myapp.yaml up
 #UPLOAD IMAGE
-#docker push deem0ne/myappdb:latest
+#docker push deem0ne/myapp:latest

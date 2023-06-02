@@ -17,7 +17,7 @@ spring:
     #password: dev
   flyway:
     enabled: true
-    baselineOnMigrate: true
+    baseline-on-migrate: true
     #defaultSchema: dev
     #user: dev
     #password: dev
