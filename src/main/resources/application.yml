@@ -9,6 +9,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         show_sql: true
     show-sql: true
+  datasource:
+    driverClassName: org.postgresql.Driver
+    #applied in profiles
+    #url: jdbc:postgresql://postgres:5432/dev
+    #username: dev
+    #password: dev
   flyway:
     enabled: true
     baselineOnMigrate: true
@@ -30,10 +36,4 @@ logging:
       max-history : 15 #num of days
       max-file-size : 10KB
       file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
-  datasource:
-      driverClassName: org.postgresql.Driver
-      #applied in profiles
-      #url: jdbc:postgresql://postgres:5432/dev
-      #username: dev
-      #password: dev
 
