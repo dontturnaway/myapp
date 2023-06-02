@@ -21,6 +21,7 @@ spring:
     #defaultSchema: dev
     #user: dev
     #password: dev
+#logging section
 logging:
   file:
     name: ./logs/mytest.log
@@ -36,4 +37,13 @@ logging:
       max-history : 15 #num of days
       max-file-size : 10KB
       file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
+#metrics section
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
