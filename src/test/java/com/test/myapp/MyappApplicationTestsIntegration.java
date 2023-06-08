@@ -30,7 +30,7 @@ class MyappApplicationTestsIntegration {
 	@Autowired
 	private ObjectMapper mapper;
 
-	@Container
+	@Container  //create Postgres container with appropriate credentials
 	private static PostgreSQLContainer<?> database = new PostgreSQLContainer<>("postgres:15.2")
 			.withDatabaseName("dev")
 			.withUsername("dev")
@@ -38,13 +38,13 @@ class MyappApplicationTestsIntegration {
 			//.withInitScript("script.sql")
 			;
 
-	@BeforeAll
+	@BeforeAll //bootstrap container for all test before run the tests
 	public static void setUp() {
 		database.withReuse(true);
 		database.start();
 	}
 
-	@DynamicPropertySource
+	@DynamicPropertySource //fetch container's properties, because we don't know it before it start
 	public static void properties(DynamicPropertyRegistry registry) {
 		registry.add("spring.datasource.url", database::getJdbcUrl);
 		registry.add("spring.datasource.username", database::getUsername);
@@ -77,7 +77,6 @@ class MyappApplicationTestsIntegration {
 						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 	}
-
 
 	@Test
 	void createPersonNegative() throws Exception {

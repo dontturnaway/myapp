@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(controllers = PeopleRESTController.class)
 @Import({SecurityConfig.class})
-
 class MyappApplicationTests {
 
 	@Autowired
