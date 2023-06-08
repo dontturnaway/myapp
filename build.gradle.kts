@@ -35,6 +35,11 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok:1.18.26")
 	testCompileOnly ("org.projectlombok:lombok:1.18.26")
 	testAnnotationProcessor ("org.projectlombok:lombok:1.18.26")
+	//Testcontainers
+	implementation(platform("org.testcontainers:testcontainers-bom:1.18.3"))
+	testImplementation("org.testcontainers:junit-jupiter")
+	testImplementation ("org.testcontainers:postgresql")
+
 }
 
 tasks.withType<Test> {

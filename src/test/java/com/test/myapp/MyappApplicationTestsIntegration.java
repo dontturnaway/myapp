@@ -1,43 +1,56 @@
 package com.test.myapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.myapp.config.SecurityConfig;
-import com.test.myapp.controllers.PeopleRESTController;
 import com.test.myapp.models.Person;
-import com.test.myapp.repositories.PeopleRepository;
-import com.test.myapp.services.PeopleService;
-import com.test.myapp.services.PersonDetailsService;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureWebMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Import;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.testcontainers.containers.PostgreSQLContainer;
+import org.testcontainers.junit.jupiter.Container;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
-@WebMvcTest(controllers = PeopleRESTController.class)
-@Import({SecurityConfig.class})
-
-class MyappApplicationTests {
+@SpringBootTest
+@AutoConfigureMockMvc
+@Testcontainers
+class MyappApplicationTestsIntegration {
 
 	@Autowired
 	private MockMvc mockMvc;
 	@Autowired
 	private ObjectMapper mapper;
 
-	@MockBean
-	PeopleRepository peopleRepository;
-	@MockBean
-	PersonDetailsService personDetailsService;
-	@MockBean
-	PeopleService peopleService;
+	@Container
+	private static PostgreSQLContainer<?> database = new PostgreSQLContainer<>("postgres:15.2")
+			.withDatabaseName("dev")
+			.withUsername("dev")
+			.withPassword("dev")
+			//.withInitScript("script.sql")
+			;
+
+	@BeforeAll
+	public static void setUp() {
+		database.withReuse(true);
+		database.start();
+	}
+
+	@DynamicPropertySource
+	public static void properties(DynamicPropertyRegistry registry) {
+		registry.add("spring.datasource.url", database::getJdbcUrl);
+		registry.add("spring.datasource.username", database::getUsername);
+		registry.add("spring.datasource.password", database::getPassword);
+		registry.add("spring.datasource.driver-class-name", database::getDriverClassName);
+	}
 
 	@Test
 	void getAllPersons() throws Exception {
@@ -60,18 +73,19 @@ class MyappApplicationTests {
 		testPerson.setRole("ROLE_USER");
 		testPerson.setYearOfBirth(1901);
 		mockMvc.perform(MockMvcRequestBuilders.post("/peoplerest")
-				.content(mapper.writeValueAsString(testPerson))
-				.contentType(MediaType.APPLICATION_JSON))
+						.content(mapper.writeValueAsString(testPerson))
+						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isCreated());
 	}
+
 
 	@Test
 	void createPersonNegative() throws Exception {
 		Person emptyTestPerson = new Person();
 		ObjectMapper mapper = new ObjectMapper();
 		mockMvc.perform(MockMvcRequestBuilders.post("/peoplerest")
-				.content(mapper.writeValueAsString(emptyTestPerson))
-				.contentType(MediaType.APPLICATION_JSON))
+						.content(mapper.writeValueAsString(emptyTestPerson))
+						.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isBadRequest());
 	}
 
