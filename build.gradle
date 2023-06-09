@@ -2,6 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.6'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id 'jacoco'
+	id 'org.sonarqube' version '4.0.0.2929' //added sonar
 }
 
 group = 'com.test'
@@ -49,10 +51,34 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
+/* Don't generate thin jar */
 tasks.jar {
 	enabled = false
 }
 
+/* rename output binary file to */
 tasks.bootJar {
 	archiveFileName = 'myapp.jar'
+}
+
+/* sonar link*/
+sonar {
+	properties {
+		property('sonar.projectKey', 'myapp')
+		property('sonar.host.url', 'http://localhost:9000/')
+		property('sonar.token', 'sqa_63d5a66048b7675e90bdd090466787cb2c8a218f')
+	}
+}
+
+/* obligatory for Sonar to catch Jacoco's test report */
+jacocoTestReport {
+	reports {
+		xml.required = true
+	}
+	dependsOn test
+}
+
+/* embed Jacoco report generation in Sonar task */
+tasks.named('sonar').configure {
+	dependsOn jacocoTestReport
 }
