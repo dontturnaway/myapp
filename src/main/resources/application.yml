@@ -40,7 +40,7 @@ logging:
   #/jaeger
   logback:
     rollingpolicy:
-      max-history : 15 #num of days
+      max-history : 1 #num of days
       max-file-size : 10KB
       file-name-pattern : "${LOG_FILE}.%d{yyyy-MM-dd}.%i.log"
 #metrics section
