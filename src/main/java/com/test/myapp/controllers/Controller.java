@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-@RequestMapping("/service")
+@RequestMapping("/")
 public class Controller {
 
     private static final Logger logger = LoggerFactory.getLogger(Controller.class);
@@ -23,17 +23,17 @@ public class Controller {
         this.restTemplate = restTemplate;
     }
 
-    @GetMapping("/path1")
-    public ResponseEntity path1() {
+    @GetMapping("/request")
+    public ResponseEntity request() {
 
-        logger.info("Incoming request at {} for request /path1 ", applicationName);
-        String response = restTemplate.getForObject("http://localhost:8090/service/path2", String.class);
-        return ResponseEntity.ok("response from /path1 + " + response);
+        logger.info("Incoming request at {} for request /request ", applicationName);
+        String response = restTemplate.getForObject("http://localhost:8090/response", String.class);
+        return ResponseEntity.ok("response from /request + " + response);
     }
 
-    @GetMapping("/path2")
-    public ResponseEntity path2() {
-        logger.info("Incoming request at {} at /path2", applicationName);
-        return ResponseEntity.ok("response from /path2 ");
+    @GetMapping("/response")
+    public ResponseEntity response() {
+        logger.info("Incoming request at {} at /response", applicationName);
+        return ResponseEntity.ok("response from /response ");
     }
 }
