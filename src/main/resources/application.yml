@@ -1,6 +1,8 @@
 server:
     port: 8080
 spring:
+  application:
+    name: myapp
   profiles:
     active: prod
   jpa:
@@ -32,6 +34,10 @@ logging:
   #pattern:
     #console : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n"
     #file : "[%d{yy-MM-dd HH:mm:ss:SSS}][%-5p][%c][%t]%m%n" #file is zipped
+  #jaeger
+  pattern:
+    level: "%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]"
+  #/jaeger
   logback:
     rollingpolicy:
       max-history : 15 #num of days
@@ -51,4 +57,8 @@ management:
   endpoint:
     health:
       show-details: always
-
+  tracing:  #jaeger
+    sampling:
+      probability: 1.0
+tracing: #jaeger
+  url: http://localhost:4318/v1/traces
