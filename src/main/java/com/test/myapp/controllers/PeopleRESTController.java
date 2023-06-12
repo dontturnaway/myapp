@@ -1,7 +1,5 @@
 package com.test.myapp.controllers;
 
-import com.test.myapp.exception.CantCreateUserExeption;
-import com.test.myapp.exception.CantCreateUserExeption;
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +20,6 @@ import java.util.List;
 public class PeopleRESTController {
 
     private final PeopleService peopleService;
-    Logger Logger = LoggerFactory.getLogger(PeopleRESTController.class);
 
     @Autowired
     public PeopleRESTController(PeopleService peopleService) {
@@ -43,16 +40,16 @@ public class PeopleRESTController {
 
     @PostMapping()
     public ResponseEntity<String> create(@RequestBody @Valid Person person,
-                                 BindingResult bindingResult) throws CantCreateUserExeption {
+                                 BindingResult bindingResult)  {
         if (bindingResult.hasErrors()) {
-           Logger.info("[POST PERSON CONTROLLER]: error, " + bindingResult);
+           log.info("[POST PERSON CONTROLLER]: error, " + bindingResult);
            return ResponseEntity.badRequest().body("Stop write shit");
         }
         peopleService.save(person);
         return ResponseEntity.created(URI.
                 create("")).body("Userid " + person.getId() + " created");
     }
-    /*
+    /* For post query
     {
     "username":"userREST",
     "yearOfBirth":1900,

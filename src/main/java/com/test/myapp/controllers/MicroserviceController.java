@@ -1,5 +1,6 @@
 package com.test.myapp.controllers;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,29 +12,28 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/")
-public class Controller {
+@Slf4j
+public class MicroserviceController {
 
-    private static final Logger logger = LoggerFactory.getLogger(Controller.class);
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
 
     @Value("${spring.application.name}")
     private String applicationName;
 
-    public Controller(RestTemplate restTemplate) {
+    public MicroserviceController(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
     @GetMapping("/request")
-    public ResponseEntity request() {
-
-        logger.info("Incoming request at {} for request /request ", applicationName);
+    public ResponseEntity<String> request() {
+        log.info("Incoming request at {} for request /request ", applicationName);
         String response = restTemplate.getForObject("http://localhost:8090/response", String.class);
         return ResponseEntity.ok("response from /request + " + response);
     }
 
     @GetMapping("/response")
-    public ResponseEntity response() {
-        logger.info("Incoming request at {} at /response", applicationName);
+    public ResponseEntity<String> response() {
+        log.info("Incoming request at {} at /response", applicationName);
         return ResponseEntity.ok("response from /response ");
     }
 }

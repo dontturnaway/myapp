@@ -3,6 +3,7 @@ package com.test.myapp.controllers;
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,18 +12,19 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/people")
-public class PeopleController {
+@Slf4j
+public class PeopleWebController {
 
     private final PeopleService peopleService;
 
     @Autowired
-    public PeopleController(PeopleService peopleService) {
+    public PeopleWebController(PeopleService peopleService) {
         this.peopleService = peopleService;
     }
 
     @GetMapping()
     public String index(Model model) {
-        System.out.println("CONTROLLER PEOPLE CALLED");
+        log.info("CONTROLLER PEOPLE CALLED");
         model.addAttribute("people", peopleService.findAll());
         return "people/index";
     }
