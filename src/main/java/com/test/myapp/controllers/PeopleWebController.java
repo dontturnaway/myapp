@@ -3,6 +3,7 @@ package com.test.myapp.controllers;
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +13,11 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/people")
+@AllArgsConstructor
 @Slf4j
 public class PeopleWebController {
 
     private final PeopleService peopleService;
-
-    @Autowired
-    public PeopleWebController(PeopleService peopleService) {
-        this.peopleService = peopleService;
-    }
 
     @GetMapping()
     public String index(Model model) {

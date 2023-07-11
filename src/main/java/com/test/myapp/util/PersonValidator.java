@@ -2,19 +2,18 @@ package com.test.myapp.util;
 
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PersonDetailsService;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
+@AllArgsConstructor
 public class PersonValidator implements Validator {
 
     private final PersonDetailsService personDetailsService;
 
-    public PersonValidator(PersonDetailsService personDetailsService) {
-        this.personDetailsService=personDetailsService;
-    }
 
     @Override
     public boolean supports(Class<?> aClass) {

@@ -1,5 +1,6 @@
 package com.test.myapp.controllers;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/")
+@AllArgsConstructor
 @Slf4j
 public class MicroserviceController {
 
@@ -17,10 +19,6 @@ public class MicroserviceController {
 
     @Value("${spring.application.name}")
     private String applicationName;
-
-    public MicroserviceController(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
 
     @GetMapping("/request")
     public ResponseEntity<String> request() {

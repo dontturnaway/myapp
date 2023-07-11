@@ -4,6 +4,7 @@ import com.test.myapp.models.Person;
 import com.test.myapp.services.RegistrationService;
 import com.test.myapp.util.PersonValidator;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,17 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@AllArgsConstructor
 @RequestMapping("/auth")
 public class AuthController {
 
     private final RegistrationService registrationService;
     private final PersonValidator personValidator;
-
-    @Autowired
-    public AuthController(PersonValidator validator, RegistrationService registrationService) {
-        this.registrationService = registrationService;
-        this.personValidator = validator;
-    }
 
     @GetMapping("/login")
     public String loginPage() {

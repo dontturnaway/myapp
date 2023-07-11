@@ -2,6 +2,7 @@ package com.test.myapp.controllers;
 
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ import java.util.List;
 
 @RestController
 @Slf4j
+@AllArgsConstructor
 @RequestMapping("/")
 public class PeopleMicroserviceController {
 
@@ -27,11 +29,6 @@ public class PeopleMicroserviceController {
 
     @Value("${spring.application.name}")
     private String applicationName;
-
-    public PeopleMicroserviceController(RestTemplate restTemplate, PeopleService peopleService) {
-        this.restTemplate = restTemplate;
-        this.peopleService=peopleService;
-    }
 
     @GetMapping("/requestpeople")
     public ResponseEntity<String> request() {

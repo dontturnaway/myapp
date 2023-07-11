@@ -3,20 +3,16 @@ package com.test.myapp.services;
 import com.test.myapp.models.Person;
 import com.test.myapp.repositories.PeopleRepository;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class RegistrationService {
     private final PeopleRepository peopleRepository;
-    private  final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public RegistrationService(PeopleRepository peopleRepository, PasswordEncoder passwordEncoder) {
-        this.peopleRepository = peopleRepository;
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public void register(Person person) {
