@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Entity
 @Table(name = "Person")
-@Getter @Setter
+@Getter @Setter @Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class Person {
     @Id

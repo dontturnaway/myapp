@@ -2,6 +2,7 @@ package com.test.myapp.controllers;
 
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,15 +17,11 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@AllArgsConstructor //no need to create constructor
 @RequestMapping("/peoplerest")
 public class PeopleRESTController {
 
     private final PeopleService peopleService;
-
-    @Autowired
-    public PeopleRESTController(PeopleService peopleService) {
-        this.peopleService = peopleService;
-    }
 
     @GetMapping()
     public List<Person> index() {
