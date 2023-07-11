@@ -1,5 +1,6 @@
 package com.test.myapp.controllers;
 
+import com.test.myapp.DTO.PersonDTO;
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
 import lombok.AllArgsConstructor;
@@ -36,13 +37,13 @@ public class PeopleRESTController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> create(@RequestBody @Valid Person person,
+    public ResponseEntity<String> create(@RequestBody @Valid PersonDTO personDTO,
                                  BindingResult bindingResult)  {
         if (bindingResult.hasErrors()) {
            log.info("[POST PERSON CONTROLLER]: error, " + bindingResult);
            return ResponseEntity.badRequest().body("Stop write shit");
         }
-        peopleService.save(person);
+        Person person = peopleService.save(personDTO);
         return ResponseEntity.created(URI.
                 create("")).body("Userid " + person.getId() + " created");
     }

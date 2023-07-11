@@ -16,6 +16,7 @@ public class RegistrationService {
 
     @Transactional
     public void register(Person person) {
+
         person.setPassword(passwordEncoder.encode(person.getPassword())); //encoding pwd
         person.setRole("ROLE_USER"); //setting default role
         peopleRepository.save(person);

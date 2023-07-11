@@ -6,6 +6,9 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 
+import java.sql.Date;
+import java.sql.Timestamp;
+
 
 @Entity
 @Table(name = "Person")
@@ -33,6 +36,9 @@ public class Person {
 
     @Column(name = "role")
     private String role;
+
+    @Column(name = "date_created")
+    Timestamp dateCreated;
 
     public Person(String username, int yearOfBirth) {
         this.username = username;

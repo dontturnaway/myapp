@@ -1,5 +1,6 @@
 package com.test.myapp.services;
 
+import com.test.myapp.DTO.PersonDTO;
 import com.test.myapp.models.Person;
 import com.test.myapp.repositories.PeopleRepository;
 import lombok.AllArgsConstructor;
@@ -27,13 +28,26 @@ public class PeopleService {
     }
 
     @Transactional
-    public void save(Person person) {
-        peopleRepository.save(person);
+    public Person save(PersonDTO personDTO) {
+        Person person = Person.builder()
+                .username(personDTO.getUsername())
+                .yearOfBirth(personDTO.getYearOfBirth())
+                .password(personDTO.getPassword())
+                .role(personDTO.getRole())
+                .dateCreated(new java.sql.Timestamp(System.currentTimeMillis()))
+                .build();
+        return peopleRepository.save(person);
     }
 
     @Transactional
-    public void update(int id, Person updatedPerson) {
-        updatedPerson.setId(id);
+    public void update(int id, PersonDTO personDTO) {
+        Person updatedPerson = Person.builder()
+                .username(personDTO.getUsername())
+                .yearOfBirth(personDTO.getYearOfBirth())
+                .password(personDTO.getPassword())
+                .role(personDTO.getRole())
+                .id(id)
+                .build();
         peopleRepository.save(updatedPerson);
     }
 

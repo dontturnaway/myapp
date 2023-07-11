@@ -1,5 +1,6 @@
 package com.test.myapp.controllers;
 
+import com.test.myapp.DTO.PersonDTO;
 import com.test.myapp.models.Person;
 import com.test.myapp.services.PeopleService;
 import jakarta.validation.Valid;
@@ -38,12 +39,12 @@ public class PeopleWebController {
     }
 
     @PostMapping()
-    public String create(@ModelAttribute("person") @Valid Person person,
+    public String create(@ModelAttribute("person") @Valid PersonDTO personDTO,
                          BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "people/new";
 
-        peopleService.save(person);
+        peopleService.save(personDTO);
         return "redirect:/people";
     }
 
@@ -54,12 +55,12 @@ public class PeopleWebController {
     }
 
     @PatchMapping("/{id}")
-    public String update(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult,
+    public String update(@ModelAttribute("person") @Valid PersonDTO personDTO, BindingResult bindingResult,
                          @PathVariable("id") int id) {
         if (bindingResult.hasErrors())
             return "people/edit";
 
-        peopleService.update(id, person);
+        peopleService.update(id, personDTO);
         return "redirect:/people";
     }
 
