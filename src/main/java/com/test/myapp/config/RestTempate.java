@@ -10,9 +10,16 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class RestTempate {
 
+    @Bean
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
+    /* If we need to customize it
     @Autowired(required=false)
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
         return builder.build();
     }
+    */
 }
