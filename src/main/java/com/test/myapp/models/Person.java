@@ -5,8 +5,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-
-import java.sql.Date;
 import java.sql.Timestamp;
 
 
@@ -37,7 +35,7 @@ public class Person {
     @Column(name = "role")
     private String role;
 
-    @Column(name = "date_created")
+    @Column(name = "date_created", nullable = false, updatable = false, insertable = false)
     Timestamp dateCreated;
 
     public Person(String username, int yearOfBirth) {
