@@ -15,11 +15,11 @@ public class RestTempate {
         return new RestTemplate();
     }
 
-    /* If we need to customize it
-    @Autowired(required=false)
-    @Bean
-    public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        return builder.build();
-    }
-    */
+//
+//    @Autowired(required=false)
+//    @Bean
+//    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+//        return builder.build();
+//    }
+
 }
