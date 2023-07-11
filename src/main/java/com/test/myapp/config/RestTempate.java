@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 
 /* Needed for remote calls via RestTemplate*/
 @Configuration
-public class RestServiceCaller {
+public class RestTempate {
 
     @Autowired(required=false)
     @Bean
